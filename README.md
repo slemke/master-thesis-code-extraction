@@ -1,0 +1,2 @@
+# Dataset Building Application
+This small application allows to extract every java method from a given folder (and its subfolders) to classify into two categories (clean and not clean). This was used to build the dataset the thesis uses for its neural networks.
