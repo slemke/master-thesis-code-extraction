@@ -1,9 +1,8 @@
 package io.github.slemke.methodextractor;
 
-import com.github.javaparser.ast.body.MethodDeclaration;
 import io.github.slemke.methodextractor.exceptions.FileException;
 import io.github.slemke.methodextractor.exceptions.GUIException;
-import io.github.slemke.methodextractor.extraction.Extractor;
+import io.github.slemke.methodextractor.extraction.ArgumentExtractor;
 import io.github.slemke.methodextractor.files.DirectoryReader;
 import io.github.slemke.methodextractor.files.FileReader;
 import io.github.slemke.methodextractor.gui.GUI;
@@ -20,9 +19,9 @@ import java.util.ArrayList;
  * This application collects all the moves from a directory so the can be manually classified as clean or not clean.
  * This speeds up the dataset building in a semi automatic way.
  */
-public class Application {
+public class MethodExtractor {
 
-    private ArrayList<MethodDeclaration> methods = new ArrayList<>();
+    private ArrayList<String> methods = new ArrayList<>();
     private int index = 0;
     private GUI gui;
 
@@ -31,7 +30,7 @@ public class Application {
      *
      * @param arguments The CLI arguments
      */
-    public Application(String[] arguments) {
+    public MethodExtractor(String[] arguments) {
         try {
             getMethods(arguments[0]);
             setupGUI();
@@ -46,8 +45,9 @@ public class Application {
      */
     private void getMethods(String path) throws FileException {
         final ArrayList<String> files = DirectoryReader.read(path);
+        final ArgumentExtractor extractor = new ArgumentExtractor();
         for(String file : files) {
-            methods.addAll(Extractor.extract(FileReader.read(file)));
+            methods.addAll(extractor.extract(FileReader.read(file)));
         }
     }
 
@@ -58,7 +58,7 @@ public class Application {
         try {
             this.gui = new GUI();
             this.gui.updateCounter(index, this.methods.size());
-            this.gui.updateCode(methods.get(0).toString());
+            this.gui.updateCode(methods.get(0));
             this.gui.setCleanCodeAction(actionEvent -> classify(true));
             this.gui.setUncleanCodeAction(actionEvent -> classify(false));
             this.gui.setSkipAction(actionEvent -> skip());
@@ -72,7 +72,7 @@ public class Application {
      * @return The currently selected method as a string
      */
     public String getCurrentMethod() {
-        return this.methods.get(this.index).toString();
+        return this.methods.get(this.index);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Application {
      * @param clean True, if the code is clean. Otherwise false.
      */
     public void classify(boolean clean) {
-        MethodDeclaration method = this.methods.get(this.index);
+        String method = this.methods.get(this.index);
         String normalized = normalizeMethod(method);
 
         if(clean) {
@@ -100,9 +100,8 @@ public class Application {
      * @param method The method from the AST
      * @return The normalized method
      */
-    private String normalizeMethod(MethodDeclaration method) {
-        method.removeJavaDocComment();
-        return Normalizer.normalize(method.toString()) + "\r\n";
+    private String normalizeMethod(String method) {
+        return Normalizer.normalize(method) + "\r\n";
     }
 
     /**

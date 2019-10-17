@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Sascha Lemke
  * @version 0.1
  */
-public class Extractor {
+public class MethodExtractor implements ExtractorStrategy {
 
     /**
      * Extracts all methods from a Java input string.
@@ -21,9 +21,9 @@ public class Extractor {
      * @param input A String containing Java code
      * @return A List of Java method declarations
      */
-    public static ArrayList<MethodDeclaration> extract(String input) {
-        ArrayList<MethodDeclaration> methods = new ArrayList<>();
-
+    @Override
+    public ArrayList<String> extract(String input) {
+        ArrayList<String> methods = new ArrayList<>();
         CompilationUnit compilationUnit = StaticJavaParser.parse(input);
 
         compilationUnit.findAll(MethodDeclaration.class)
@@ -31,7 +31,10 @@ public class Extractor {
                 .peek(f -> {
                     f.setAnnotations(new NodeList<>());
                 })
-                .forEach(methods::add);
+                .forEach(f -> {
+                    f.removeJavaDocComment();
+                    methods.add(f.toString());
+                });
         return methods;
     }
 }
