@@ -2,7 +2,7 @@ package io.github.slemke.methodextractor.extraction;
 
 import java.util.ArrayList;
 
-public interface ExtractorStrategy {
+public interface Extractor {
 
     ArrayList<String> extract(String input);
 }

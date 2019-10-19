@@ -1,8 +1,8 @@
-import io.github.slemke.methodextractor.MethodExtractor;
+import io.github.slemke.methodextractor.Application;
 
 public class Main {
 
     public static void main(String[] args) {
-        new MethodExtractor(args);
+        new Application(args);
     }
 }

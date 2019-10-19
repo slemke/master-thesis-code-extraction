@@ -6,9 +6,9 @@ package io.github.slemke.methodextractor.exceptions;
  * @author Sascha Lemke
  * @version 0.1
  */
-public class GUIException extends Exception {
+public class UserInterfaceException extends Exception {
 
-    public GUIException(String message, Throwable throwable) {
+    public UserInterfaceException(String message, Throwable throwable) {
         super(message, throwable);
     }
 }

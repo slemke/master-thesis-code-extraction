@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 /**
- * The DirectoryReader class provides methods to read files from directories.
+ * The DirectoryReader class provides methods to read files from directories recursively.
  *
  * @author Sascha Lemke
  * @version 0.1
@@ -30,8 +30,8 @@ public class DirectoryReader {
             walk.filter(Files::isRegularFile)
                 .filter(f -> f.toString().toLowerCase().endsWith(".java"))
                 .forEach(f -> files.add(f.toString()));
-        } catch (IOException e) {
-            throw new FileException("Unable to Java files from given directory", e);
+        } catch (IOException exception) {
+            throw new FileException("Unable to Java files from given directory", exception);
         }
         return files;
     }

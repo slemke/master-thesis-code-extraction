@@ -1,6 +1,6 @@
 package io.github.slemke.methodextractor.gui;
 
-import io.github.slemke.methodextractor.exceptions.GUIException;
+import io.github.slemke.methodextractor.exceptions.UserInterfaceException;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -10,43 +10,45 @@ import java.awt.event.ActionListener;
  * @author Sascha Lemke
  * @version 0.1
  */
-public class GUI extends JFrame {
+public class UserInterface extends JFrame {
 
     /**
      * The textarea that is displaying the currently selected code.
      */
-    private JTextArea code;
+    private JTextArea feature;
 
     /**
      * The panel that displays the classification options.
      */
     private ClassificationPanel classificationPanel;
 
-    public GUI() throws GUIException {
+    public UserInterface() throws UserInterfaceException {
         setLookAndFeel();
+        setTitle("Code Classification");
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-        this.code = new JTextArea(29, 20);
-        JScrollPane scrollPane = new JScrollPane(this.code);
+        this.feature = new JTextArea(30, 20);
+        JScrollPane scrollPane = new JScrollPane(this.feature);
         this.classificationPanel = new ClassificationPanel();
 
         add(classificationPanel);
         add(scrollPane);
 
-        setSize(800, 600);
+        setSize(600, 400);
         setVisible(true);
     }
 
     /**
      * Sets the "SystemLookAndFeel" for the application.
-     * @throws GUIException Throws a GUIException when application is unable to use the "SystemLookAndFeel"
+     * @throws UserInterfaceException Throws a GUIException when application is unable to use the "SystemLookAndFeel"
      */
-    private void setLookAndFeel() throws GUIException {
+    private void setLookAndFeel() throws UserInterfaceException {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            throw new GUIException("Unable to initialize GUI", e);
+            throw new UserInterfaceException("Unable to initialize user interface", e);
         }
     }
 
@@ -78,8 +80,8 @@ public class GUI extends JFrame {
      * Updates the code that is shown in the textarea.
      * @param method The new method to show
      */
-    public void updateCode(String method) {
-        this.code.setText(method);
+    public void updateFeature(String method) {
+        this.feature.setText(method);
     }
 
     /**

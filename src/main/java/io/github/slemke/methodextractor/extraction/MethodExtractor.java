@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Sascha Lemke
  * @version 0.1
  */
-public class MethodExtractor implements ExtractorStrategy {
+public class MethodExtractor implements Extractor {
 
     /**
      * Extracts all methods from a Java input string.
