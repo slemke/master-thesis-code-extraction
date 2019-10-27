@@ -13,13 +13,16 @@ public class ArgumentExtractor implements Extractor {
     @Override
     public ArrayList<String> extract(String input) {
         ArrayList<String> argumentList = new ArrayList<>();
-        CompilationUnit compilationUnit = StaticJavaParser.parse(input);
-
-        compilationUnit.findAll(MethodDeclaration.class)
-                .forEach(f -> {
-                    final String arguments = getParametersAsString(f.getParameters());
-                    argumentList.add(arguments);
-                });
+        try {
+            CompilationUnit compilationUnit = StaticJavaParser.parse(input);
+            compilationUnit.findAll(MethodDeclaration.class)
+                    .forEach(f -> {
+                        final String arguments = getParametersAsString(f.getParameters());
+                        argumentList.add(arguments);
+                    });
+        } catch(Exception exception) {
+            System.err.println("Parser error");
+        }
         return argumentList;
     }
 
