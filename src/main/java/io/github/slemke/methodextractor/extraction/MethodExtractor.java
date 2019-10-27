@@ -24,9 +24,9 @@ public class MethodExtractor implements Extractor {
     @Override
     public ArrayList<String> extract(String input) {
         ArrayList<String> methods = new ArrayList<>();
-        CompilationUnit compilationUnit = StaticJavaParser.parse(input);
-
-        compilationUnit.findAll(MethodDeclaration.class)
+        try {
+            CompilationUnit compilationUnit = StaticJavaParser.parse(input);
+            compilationUnit.findAll(MethodDeclaration.class)
                 .stream()
                 .peek(f -> {
                     f.setAnnotations(new NodeList<>());
@@ -35,6 +35,9 @@ public class MethodExtractor implements Extractor {
                     f.removeJavaDocComment();
                     methods.add(f.toString());
                 });
+        } catch(Exception exception) {
+            System.err.println("Parser error");
+        }
         return methods;
     }
 }
