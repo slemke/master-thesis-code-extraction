@@ -1,6 +1,5 @@
 package io.github.slemke.methodextractor.extraction;
 
-import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
