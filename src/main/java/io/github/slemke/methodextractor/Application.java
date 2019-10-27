@@ -46,7 +46,12 @@ public class Application {
     private void getFeature(String path, Extractor extractor) throws FileException {
         final ArrayList<String> files = DirectoryReader.read(path);
         for(String file : files) {
-            features.addAll(extractor.extract(FileReader.read(file)));
+            final ArrayList<String> extractedFeatures = extractor.extract(FileReader.read(file));
+            for(String feature : extractedFeatures) {
+                if(!features.contains(feature)) {
+                    features.add(feature);
+                }
+            }
         }
     }
 
