@@ -23,6 +23,16 @@ public class Normalizer {
         feature = feature.replace("\r\n", " ");
         feature = feature.replace("\n", " ");
         feature = feature.replace("\r", " ");
+        feature = feature.replaceAll("\\(", " ( ");
+        feature = feature.replaceAll("\\)", " ) ");
+        feature = feature.replaceAll("<\\?", " <? ");
+        feature = feature.replaceAll("<", " < ");
+        feature = feature.replaceAll(">", " > ");
+        feature = feature.replaceAll("\\{", " { ");
+        feature = feature.replaceAll("}", " } ");
+        feature = feature.replaceAll("\"", " \" ");
+        feature = feature.replaceAll(",", " , ");
+        feature = feature.replaceAll(";", " ; ");
         feature = feature.replaceAll(" {2,}", " ");
         return feature;
     }

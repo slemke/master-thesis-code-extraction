@@ -36,7 +36,7 @@ public class UserInterface extends JFrame {
         add(classificationPanel);
         add(scrollPane);
 
-        setSize(600, 400);
+        setSize(1200, 400);
         setVisible(true);
     }
 

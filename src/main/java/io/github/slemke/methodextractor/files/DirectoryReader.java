@@ -31,6 +31,7 @@ public class DirectoryReader {
                 .filter(f -> f.toString().toLowerCase().endsWith(".java"))
                 .forEach(f -> files.add(f.toString()));
         } catch (IOException exception) {
+            System.err.println(exception);
             throw new FileException("Unable to Java files from given directory", exception);
         }
         return files;
