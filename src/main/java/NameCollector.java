@@ -4,11 +4,8 @@ import io.github.slemke.methodextractor.files.DirectoryReader;
 import io.github.slemke.methodextractor.files.FileReader;
 import io.github.slemke.methodextractor.files.FileWriter;
 
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Set;
 
 public class NameCollector {
 
