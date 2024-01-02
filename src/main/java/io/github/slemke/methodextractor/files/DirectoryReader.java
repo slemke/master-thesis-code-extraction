@@ -9,20 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-/**
- * The DirectoryReader class provides methods to read files from directories recursively.
- *
- * @author Sascha Lemke
- * @version 0.1
- */
 public class DirectoryReader {
 
-    /**
-     * Returns a list of all paths to java files from a given directory.
-     *
-     * @param path The root directory
-     * @return A list of paths to Java files
-     */
     public static ArrayList<String> read(String path) throws FileException {
         ArrayList<String> files = new ArrayList<>();
 

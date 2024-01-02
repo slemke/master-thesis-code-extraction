@@ -336,12 +336,7 @@ public class NameCollector {
         MethodNameExtractor extractor = new MethodNameExtractor();
 
         String[] projects = {
-         //       "D:\\madataset\\elasticsearch-7.4.2\\server\\src\\main\\java\\org\\elasticsearch",
-         //       "D:\\madataset\\dubbo-dubbo-2.7.3\\dubbo-common\\src\\main\\java",
-         //       "D:\\madataset\\EventBus-3.1.1\\EventBus\\src",
-         //       "D:\\madataset\\gson-gson-parent-2.8.5\\gson\\src\\main\\java\\com",
-        //        "D:\\madataset\\guava-28.1\\guava\\src\\com",
-         "D:\\madataset\\RxJava-2.2.14\\src\\main\\java\\io"
+            // path of projects
         };
 
         String[] verbs = NameCollector.verbs();
